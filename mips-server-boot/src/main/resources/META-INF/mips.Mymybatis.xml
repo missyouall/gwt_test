@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+	<typeAliases>
+		<typeAlias alias="StuBean"
+			type="com.th.supcom.test.serverimpl.pojo.StuBean" />
+	</typeAliases>
+
+	<typeHandlers>
+		<typeHandler javaType="Date" jdbcType="DATE"
+			handler="org.apache.ibatis.type.DateTypeHandler" />
+	</typeHandlers>
+
+	<plugins>
+		<plugin interceptor="com.th.supcom.framework.mybatis.OffsetLimitInterceptor">
+			<property name="dialectClass"
+				value="com.th.supcom.framework.mybatis.dialect.OracleDialect" />
+		</plugin>
+	</plugins>
+	<mappers>
+		<mapper
+			resource="META-INF/sqlmap/Stu.sqlmap.xml" />
+	</mappers>
+</configuration>    

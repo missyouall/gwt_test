@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="mips-service-propertyPlaceholderConfigurer"
+		class="com.th.supcom.framework.commons.SystemContext">
+		<property name="order" value="2" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<!-- 优先读取系统的环境变量值，这个时候，就不读取文件中的内容了，系统变量是没有设置时，才读取文件中的内容 -->
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="locations">
+			<list>
+				<value>classpath:META-INF/global.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	
+	
+	<bean id="mips_dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${mips.jdbc.driverClassName}" />
+		<property name="url" value="${mips.jdbc.url}" />
+		<property name="username" value="${mips.jdbc.username}" />
+		<property name="password" value="${mips.jdbc.password}" />
+		<property name="poolPreparedStatements" value="false" />
+	</bean>
+
+	<bean id="serialNoGeneratorHelperInter"
+		class="com.th.supcom.framework.serial.manager.SerialNoGeneratorHelper">
+		<property name="dataSource" ref="mips_dataSource" />
+	</bean>
+
+	<bean id="mips_sqlserver_dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${mips.sqlserver.jdbc.driverClassName}" />
+		<property name="url" value="${mips.sqlserver.jdbc.url}" />
+		<property name="username" value="${mips.sqlserver.jdbc.username}" />
+		<property name="password" value="${mips.sqlserver.jdbc.password}" />
+		<property name="poolPreparedStatements" value="false" />
+	</bean>
+
+	<bean id="mips_seq_dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${mips.jdbc.driverClassName}" />
+		<property name="url" value="${mips.jdbc.url}" />
+		<property name="username" value="${mips.jdbc.username}" />
+		<property name="password" value="${mips.jdbc.password}" />
+		<property name="poolPreparedStatements" value="false" />
+	</bean>
+
+	<!-- 开发模式时数据源配置 -->
+	<bean id="st-dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${st.jdbc.driverClassName}" />
+		<property name="url" value="${st.jdbc.url}" />
+		<property name="username" value="${st.jdbc.username}" />
+		<property name="password" value="${st.jdbc.password}" />
+		<property name="poolPreparedStatements" value="false" />
+	</bean>
+
+	
+	<import resource="classpath:META-INF/framework-st-all.spring.xml" />
+	<import resource="classpath:META-INF/param-all.spring.xml" />
+	
+
+	<bean name="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mips_dataSource"></property>
+	</bean>
+
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="interceptorPointCuts"
+			expression="execution(* com.th.supcom.mips.internal.api.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
+	</aop:config>
+	
+	<!-- 加载bean声明XML文件 -->
+	<import resource="classpath:META-INF/dubbo/mips-dubbo-all.spring.xml" />
+	<import resource="classpath:META-INF/mips-dao.spring.xml" />
+	<import resource="classpath:META-INF/mips-manager.spring.xml" />
+	<import resource="classpath:META-INF/mips-service.spring.xml" />
+</beans>

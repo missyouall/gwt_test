@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="${applicationName}" />
+
+	<dubbo:registry protocol="${dubbo.registry.protocol}" address="${zookeeper.registry.address}"
+		file="${registry.file.rootdir}/${applicationName}.cache" />
+	<dubbo:protocol name="dubbo" port="${zookeeper.protocol.port}"
+		threads="${mips.service.threads}" /><!-- host="192.168.202.19" -->
+	
+	<import resource="classpath:META-INF/dubbo/mips-dubbo-Myservice-provider.xml" />
+</beans>

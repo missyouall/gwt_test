@@ -1,0 +1,26 @@
+<module rename-to="index">
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.user.theme.standard.Standard" />
+	<inherits name="com.extjs.gxt.ui.GXT" />
+
+	<inherits name="com.th.framework.facade.ui.mini.MiniFacade" />
+	<!-- Shell的前台模块 -->
+	<inherits name="net.carefx.framework.mini.Shell" />
+	<inherits name="com.th.supcom.framework.dict.web.gwt.Dict" />
+	<inherits name="com.th.supcom.framework.employee.web.gwt.Employee" />
+	<inherits name="com.th.supcom.framework.organization.web.gwt.Organization" />
+	<inherits name="com.th.supcom.framework.web.gwt.FcFrameworkWidgets" />
+	<inherits name="net.carefx.framework.web.gwt.FrameworkWidgets" />
+	<!-- 打印组件 -->
+	<inherits name="com.th.supcom.framework.print.print" />
+	<!-- 时间格式化问题 -->
+	<inherits name="com.google.gwt.i18n.I18N"/>  
+	<set-property name="gwt.logging.enabled" value="FALSE" />
+	<set-property name="user.agent" value="safari" />
+	<extend-property name="locale" values="zh" />
+
+	<public path="public" />
+<!-- 	<script src="sdeeditor.js" /> -->
+
+	<entry-point class="com.th.supcom.test.mygwt_test.client.Index" />
+</module>

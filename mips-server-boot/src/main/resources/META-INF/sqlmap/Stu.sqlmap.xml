@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.th.supcom.test.serverimpl.dao.StuMapper">
+    
+    <resultMap id="stuMap" type="StuBean">
+        <result property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="sex" column="SEX"/>
+        <result property="age" column="AGE"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="DATE"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        ID, NAME,SEX,AGE,to_char(create_time,'YYYY-MM-DD HH24:MM:ss') AS create_time
+    </sql>
+    <sql id="Base_Column_List2">
+        ID, NAME,SEX,AGE,create_time
+    </sql>
+    <sql id="Example_Where_Clause" >
+      <where>  
+         1=1
+         <if test="id!=null">
+         AND ID=#{id,jdbcType=VARCHAR}
+         </if> 
+         <if test="name!=null">
+         AND NAME  like '%${name}%'
+         </if> 
+         <if test="sex!=null">
+         AND SEX=#{sex,jdbcType=DECIMAL}
+         </if> 
+         <if test="createTime!=null and createTime!=''">
+         AND CREATE_TIME  &gt;= #{createTime,jdbcType=DATE}
+         </if> 
+     </where> 
+   </sql>
+   
+   <sql id="Update_By_Example" >
+     <set >
+     
+      <if test="id!=null">
+          ID=#{id,jdbcType=VARCHAR},
+         </if> 
+         <if test="name!=null">
+          NAME=#{name,jdbcType=VARCHAR},
+         </if> 
+         <if test="sex!=null">
+          SEX=#{sex,jdbcType=DECIMAL},
+         </if> 
+     	 <if test="age!=null">
+          AGE=#{age,jdbcType=DECIMAL},
+         </if> 
+    </set>
+   </sql>
+    
+   <select id="queryStuById" resultMap="stuMap" parameterType="String">
+        SELECT 
+            <include refid="Base_Column_List" /> 
+        FROM test_stu
+        WHERE
+        ID=#{id}
+    </select>
+    
+    <select id="queryStuByExample" resultMap="stuMap" parameterType="StuBean">
+        SELECT 
+        <include refid="Base_Column_List2" /> 
+        FROM test_stu
+        <include refid="Example_Where_Clause" /> 
+    </select>
+    
+   
+    
+   <insert id="addStu"  parameterType="StuBean" >
+    INSERT INTO test_stu (<include refid="Base_Column_List2" />)
+    VALUES(
+     #{id, jdbcType=VARCHAR},
+     #{name, jdbcType=VARCHAR},
+     #{sex, jdbcType=DECIMAL},
+     #{age, jdbcType=DECIMAL},
+     #{createTime, jdbcType=DATE}
+    )
+   </insert>
+   
+    <delete id="delStu" parameterType="String" >
+     delete from test_stu
+        WHERE     ID=#{id}
+    </delete>
+    
+
+    
+    <update id="updateStu" parameterType="StuBean" >
+    UPDATE test_stu 
+    <include refid="Update_By_Example" />
+    WHERE
+    ID=#{id,jdbcType=VARCHAR}
+    </update>
+    
+</mapper>

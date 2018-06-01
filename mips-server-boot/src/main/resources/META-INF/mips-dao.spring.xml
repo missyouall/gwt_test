@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<bean id="dialectManager"
+		class="net.carefx.framework.mybatis.dialect.DefalutDialectManager"></bean>
+	<!-- Session工厂 -->
+
+	<bean id="mips_sqlSessionFactory" class="net.carefx.framework.mybatis.FcSqlSessionFactoryBean">
+		<property name="dataSource" ref="mips_dataSource" />
+		
+		<!--加载mips.Mymybatis.xml-->
+		<property name="configLocation" value="classpath:META-INF/mips.Mymybatis.xml" />
+		
+		<property name="dialectManager" ref="dialectManager" />
+	</bean>
+
+	<bean id="mips_carefxTableSeqManager"
+		class="com.th.supcom.framework.db.manager.impl.TableSeqManagerImpl">
+		<property name="dataSource">
+			<ref bean="mips_seq_dataSource" />
+		</property>
+	</bean>
+	
+	
+	<!-- Mapper映射 -->
+	<bean id="stuMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.th.supcom.test.serverimpl.dao.StuMapper"></property>
+		<property name="sqlSessionFactory" ref="mips_sqlSessionFactory"></property>
+	</bean>
+</beans>

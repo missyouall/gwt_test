@@ -1,0 +1,13 @@
+<framework>
+	<frameworkMenu code="_bds_" title="信息管理菜单" command=""
+		ordinal='1'>
+		<frameworkMenu code="_codetable_stu" title="测试菜单1"
+			command="com.th.supcom.test.mygwt_test.client.page.StuEntryPoint"
+			ordinal='1'>
+		</frameworkMenu>
+		<frameworkMenu code="_codetable_stu" title="测试菜单2"
+			command="com.th.supcom.test.mygwt_test.client.page.StuEntryPoint"
+			ordinal='1'>
+		</frameworkMenu>
+	</frameworkMenu>
+</framework>

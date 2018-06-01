@@ -1,0 +1,45 @@
+<framework>
+	 <frameworkPlugin code="_fc_framework_time_plugin"
+        title="服务器时间"
+        command="com.th.framework.web.plugin.toolbar.time.client.page.ServerSystemTimeEntryPoint"
+        ordinal='6'>
+        <param>yyyy-MM-dd E HH:mm</param>
+    </frameworkPlugin>
+	<!-- 提示工具的插件 -->
+	<frameworkPlugin code="_fc_framework_debug"
+		title="调试工具"
+		command="com.th.framework.web.plugin.debug.client.FrameworkDebugEntryPoint"
+		ordinal='444'>
+			<param>Ctrl+Shift+F2</param>
+	</frameworkPlugin>	
+	
+	<!-- 退出系统插件 -->
+	<frameworkPlugin code='_fc_framework_logout_plugin'
+		title='退出系统插件'
+		command='com.th.framework.web.plugin.toolbar.logout.client.page.LogOutEntryPoint'
+		ordinal="3">
+	</frameworkPlugin>
+
+	<!-- 帮助系统插件 -->
+	<frameworkPlugin code='_fc_framework_help_plugin'
+		title='帮助系统插件'
+		command='com.th.framework.web.plugin.toolbar.systemhelp.client.page.SystemHelpEntryPoint'
+		ordinal="2">
+	</frameworkPlugin>
+	
+	<!-- 登陆用户名 -->
+	<frameworkPlugin code="_fc_framework_loginname_plugin"
+		title="登录用户名"
+		command="com.th.framework.web.plugin.toolbar.sysloginname.client.page.SysLoginNameEntryPoint"
+		ordinal='1'>
+	</frameworkPlugin>
+
+	<frameworkPlugin code="_fc_framework_switch_workbench_plugin"
+		title="切换工作台"
+		command="net.carefx.framework.client.mvc.page.WorkbenchChangeEntryPoint"
+		ordinal='0'>
+			<param>net.carefx.framework.client.mvc.workbench.impl.DefaultWorkbenchChooseViewFactory</param>
+	</frameworkPlugin>
+
+
+</framework>

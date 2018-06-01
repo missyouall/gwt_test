@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.th.supcom.mips</groupId>
+		<artifactId>mips-parent</artifactId>
+		<version>0.6.10-tjh-SNAPSHOT</version>
+	</parent>
+	<artifactId>mips-Myserver</artifactId>
+	<name>Medical Insurance Payments System Service Boot</name>
+	<packaging>war</packaging>
+	<distributionManagement>
+		<site>
+			<id>sites-url</id>
+			<url>dav:${sites.url}/${project.artifactId}/${project.version}</url>
+			
+		</site>
+	</distributionManagement>
+	<dependencies>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom.mips</groupId>
+			<artifactId>mips-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom.mips</groupId>
+			<artifactId>mips-nrcmi-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-standard-service-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom.framework</groupId>
+			<artifactId>framework-standard-adapter-his</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.ws.commons.schema/XmlSchema -->
+<dependency>
+    <groupId>org.apache.ws.commons.schema</groupId>
+    <artifactId>XmlSchema</artifactId>
+    <version>1.3.2</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/wsdl4j/wsdl4j -->
+<dependency>
+    <groupId>wsdl4j</groupId>
+    <artifactId>wsdl4j</artifactId>
+    <version>1.6.2</version>
+</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<manifest>
+						<!-- 插件自带的properties -->
+						<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+					</manifest>
+					<manifestEntries>
+						<!-- 自定义属性，自定义属性可以读取maven定义的变量，也可以读取操作系统的变量。也可以读取构建时jenkins设置的一些变量 -->
+						<Timestamp>${maven.build.timestamp}</Timestamp>
+					</manifestEntries>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>${war.server.name}</warName>
+					<packagingExcludes>**/*-sources.jar</packagingExcludes>
+					<archive>
+						<manifest>
+							<!-- 插件自带的properties -->
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<!-- 自定义属性，自定义属性可以读取maven定义的变量，也可以读取操作系统的变量。也可以读取构建时jenkins设置的一些变量 -->
+							<Timestamp>${maven.build.timestamp}</Timestamp>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>${war.server.name}</warName>
+					<packagingExcludes>**/*-sources.jar</packagingExcludes>
+					<!-- <packagingIncludes>**/framework**.jar,</packagingIncludes> -->
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>clean</id>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>delete third party jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${settings.localRepository}/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar" />
+								<unzip src="target/${war.server.name}.war" dest="target/temp" />
+								<delete file="target/${war.server.name}.war" />
+								<delete>
+									<fileset dir="target\temp\WEB-INF\lib" excludes="framework*.jar,dubbo*.jar,fc*.jar,commons-beanutils-1.8.0.jar,commons-chain-1.2.jar,earth*.jar,mips*.jar,joda-time*.jar,guava*.jar,upt*.jar,xom*.jar,jettison*.jar,pts*.jar,pca*.jar,emr*.jar,jedis*.jar,commons-pool2*.jar" />
+								</delete>
+								<!-- </for> -->
+								<zip basedir="target\temp" destfile="target/${war.server.name}.war" />
+								<delete dir="target/temp" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<!-- <plugin> -->
+			<!-- <groupId>org.jboss.as.plugins</groupId> -->
+			<!-- <artifactId>jboss-as-maven-plugin</artifactId> -->
+			<!-- <version>${jboss-as-maven-plugin.version}</version> -->
+			<!-- <configuration> -->
+			<!-- <hostname>${war.url}</hostname> -->
+			<!-- <port>${war.port}</port> -->
+			<!-- <username>xunuo</username> -->
+			<!-- <password>xunuo211!</password> -->
+			<!-- <domain> -->
+			<!-- <server-groups> -->
+			<!-- <server-group>${server.group}</server-group> -->
+			<!-- </server-groups> -->
+			<!-- </domain> -->
+			<!-- <filenames> -->
+			<!-- <fileName>target/${war.server.name}.war</fileName> -->
+			<!-- </filenames> -->
+			<!-- </configuration> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <phase>install</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>deploy</goal> -->
+			<!-- </goals> -->
+			<!-- <configuration> -->
+			<!-- <hostname>${war.url}</hostname> -->
+			<!-- <port>${war.port}</port> -->
+			<!-- <username>xunuo</username> -->
+			<!-- <password>xunuo211!</password> -->
+			<!-- <filename>${war.server.name}.war</filename> -->
+			<!-- </configuration> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
+		</plugins>
+	</build>
+</project>
+

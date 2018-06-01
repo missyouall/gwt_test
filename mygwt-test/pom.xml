@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- POM file generated with GWT webAppCreator -->
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.th.supcom</groupId>
+		<artifactId>super-parent</artifactId>
+		<version>1.2.7</version>
+	</parent>
+	<artifactId>mini-gwt-test</artifactId>
+	<groupId>com.th.supcom.test</groupId>
+	<packaging>war</packaging>
+	<name>Framework-portal-template-boot Maven Webapp</name> 
+	<url>http://maven.apache.org</url>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<framework-facade.version>4.4.16-rc3</framework-facade.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.th.supcom</groupId>
+				<artifactId>framework-facade-ui</artifactId>
+				<version>${framework-facade.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.th.supcom</groupId>
+				<artifactId>framework-facade-core</artifactId>
+				<version>${framework-facade.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+
+		</dependencies>
+	</dependencyManagement>
+
+	<distributionManagement>
+		<site>
+			<id>sites-url</id>
+			<url>dav:${sites.url}/${project.artifactId}/${project.version}</url>
+		</site>
+		<repository>
+			<id>Releases</id>
+			<url>http://nexus.cenboomh.com:88/nexus/content/repositories/Releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>Snapshots</id>
+			<url>http://nexus.cenboomh.com:88/nexus/content/repositories/Snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	<dependencies>
+		
+		<dependency>
+			<groupId>com.th.supcom.framework</groupId>
+			<artifactId>framework-schedule-ui</artifactId>
+			<version>5.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom.framework</groupId>
+			<artifactId>framework-schedule-ui</artifactId>
+			<version>5.0.13</version>
+			<classifier>sources</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ws.commons.schema</groupId>
+			<artifactId>XmlSchema</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom.framework</groupId>
+			<artifactId>framework-commons-utils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom.framework</groupId>
+			<artifactId>framework-commons-utils</artifactId>
+			<classifier>sources</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-standard-service-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-standard-service-api</artifactId>
+			<classifier>sources</classifier>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.th.supcom.framework</groupId>
+			<artifactId>framework-standard-adapter-his</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom.framework</groupId>
+			<artifactId>framework-standard-adapter-his</artifactId>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>net.carefx.framework</groupId>
+			<artifactId>framework-ui-shell-mini</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.carefx.framework</groupId>
+			<artifactId>framework-ui-shell-mini</artifactId>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>net.carefx.framework</groupId>
+			<artifactId>framework-facade-ui-mini</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-dev</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>net.carefx.framework</groupId>
+			<artifactId>framework-facade-ui-mini</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-dev</artifactId>
+				</exclusion>
+			</exclusions>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-standard-widgets</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-dev</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-standard-widgets</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-dev</artifactId>
+				</exclusion>
+			</exclusions>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-kit-gwt-print</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-kit-gwt-print</artifactId>
+			<classifier>sources</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-kit-gwt-download</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.th.supcom</groupId>
+			<artifactId>framework-kit-gwt-download</artifactId>
+			<classifier>sources</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.3.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.novanic.gwteventservice</groupId>
+			<artifactId>gwteventservice</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.extjs</groupId>
+			<artifactId>gxt</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.carefx.3rdparty.db</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>1.0.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+
+		<!-- Spring Jar -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web-servlet</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ant-contrib</groupId>
+			<artifactId>ant-contrib</artifactId>
+			<version>1.0b3</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>dms</finalName>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>${war.name}</warName>
+					<packagingExcludes>**/*-sources.jar</packagingExcludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<configuration>
+							<runTarget>index.html</runTarget>
+							<hostedWebapp>${webapp.target.dir}</hostedWebapp>
+							<modules>
+								<module>com.th.supcom.test.mini_gwt_test.Index</module>
+							</modules>
+							<extraJvmArgs>-Xmx1024M -Xss1024k</extraJvmArgs>
+
+						</configuration>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>clean</id>
+						<configuration>
+
+							<tasks>
+								<echo>clean folder ${webapp.src.dir}</echo>
+								<delete dir="${webapp.src.dir}/WEB-INF/classes" />
+								<delete dir="${webapp.src.dir}/index" />
+							</tasks>
+						</configuration>
+						<phase>pre-clean</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>delete third party jar</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<taskdef resource="net/sf/antcontrib/antlib.xml"
+									classpath="${settings.localRepository}/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar" />
+								<unzip src="target/${war.name}.war" dest="target/temp" />
+								<delete file="target/${war.name}.war" />
+								<delete>
+									<fileset dir="target/temp/WEB-INF/lib"
+										excludes="framework*.jar,dubbo*.jar,dms*.jar,jxls*.jar,          saturn*.jar,ppms*.jar,uum*.jar,commons-jexl*.jar,commons-digester*.jar" />
+								</delete>
+								<replace file="target/temp/WEB-INF/web.xml" token="test-root-beans.spring.xml"
+									value="root-beans.spring.xml" />
+								<delete
+									file="target/temp/WEB-INF/classes/META-INF/test-root-beans.spring.xml" />
+								<delete
+									file="target/temp/WEB-INF/classes/META-INF/framework-mock.xml" />
+								<delete file="target/temp/WEB-INF/classes/log4j.xml" />
+								<zip basedir="target/temp" destfile="target/${war.name}.war" />
+								<delete dir="target/temp" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+
+</project>
